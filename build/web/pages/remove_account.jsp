@@ -1,3 +1,4 @@
+<%@page import="java.sql.SQLException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,20 +12,22 @@
         <%@include file="../WEB-INF/jspf/nav.jspf" %>
 
         <%
-            boolean success = accountManager.removeAccountById(request.getParameter("id"));
-            String strStatus;
-            String strClass;
-            if (success) {
-                strStatus = " was removed success.";
-                strClass = "green";
-            } else {
-                strStatus = " was not removed.";
-                strClass = "red";
-                response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+            try {
+                accountManager.removeAccountById(request.getParameter("id"));
+        %>
+        <p class="green">${param.id} was removed success.</p>
+        <%
+            } catch (SQLException ex) {
+        %>
+        <p class="red">${param.id} was NOT removed.</p>
+        <%
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+            } catch (NumberFormatException ex) {
+        %>
+        <p class="red">${param.id} was NOT removed.</p>
+        <%
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
             }
         %>
-        <p class="<%=strClass%>">${param.id}
-            <%=strStatus%>
-        </p>
     </body>
 </html>

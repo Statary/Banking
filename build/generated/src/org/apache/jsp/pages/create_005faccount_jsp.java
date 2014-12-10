@@ -3,6 +3,7 @@ package org.apache.jsp.pages;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.sql.SQLException;
 
 public final class create_005faccount_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -47,6 +48,7 @@ public final class create_005faccount_jsp extends org.apache.jasper.runtime.Http
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
       out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
@@ -74,32 +76,42 @@ public final class create_005faccount_jsp extends org.apache.jasper.runtime.Http
       out.write("\n");
       out.write("        ");
 
-            boolean success = accountManager.createAccount(request.getParameter("fio"),
-                    request.getParameter("doc")
-            );
-            String strStatus;
-            String strClass;
-            if (success) {
-                strStatus = " was added success.";
-                strClass = "green";
-            } else {
-                strStatus = " was not added.";
-                strClass = "red";
+            try {
+                accountManager.createAccount(request.getParameter("fio"), request.getParameter("doc"));
+        
+      out.write("\n");
+      out.write("        <p class=\"green\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.fio}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" with doc - ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.fio}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" was added success.</p>\n");
+      out.write("        ");
+
+            } catch (SQLException ex) {
+        
+      out.write("\n");
+      out.write("        <p class=\"red\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.fio}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" with doc - ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.fio}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" was NOT added.</p>\n");
+      out.write("        ");
+
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+            } catch (NumberFormatException ex) {
+        
+      out.write("\n");
+      out.write("        <p class=\"red\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.fio}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" with doc - ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.fio}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" was NOT added.</p>\n");
+      out.write("        ");
+
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
             }
         
       out.write("\n");
-      out.write("        <p class=\"");
-      out.print(strClass);
-      out.write('"');
-      out.write('>');
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.fio}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(" with doc - ");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.doc}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("\n");
-      out.write("            ");
-      out.print(strStatus);
-      out.write("\n");
-      out.write("        </p>\n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {

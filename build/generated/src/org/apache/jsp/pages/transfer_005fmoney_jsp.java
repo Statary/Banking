@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import java.sql.SQLException;
 
-public final class remove_005faccount_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class transfer_005fmoney_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -53,7 +53,7 @@ public final class remove_005faccount_jsp extends org.apache.jasper.runtime.Http
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>Account Removing</title>\n");
+      out.write("        <title>Transfer Money</title>\n");
       out.write("        <link href=\"../css/main.css\" rel=\"stylesheet\" type=\"text/css\">\n");
       out.write("    </head>\n");
       out.write("\n");
@@ -77,29 +77,44 @@ public final class remove_005faccount_jsp extends org.apache.jasper.runtime.Http
       out.write("        ");
 
             try {
-                accountManager.removeAccountById(request.getParameter("id"));
+                accountManager.transferMoney(request.getParameter("sender_id")
+                                            , request.getParameter("receiver_id")
+                                            , request.getParameter("money")
+                                            );
         
       out.write("\n");
-      out.write("        <p class=\"green\">");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(" was removed success.</p>\n");
+      out.write("        <p class=\"green\">Transfer from ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.sender_id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" to ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.receiver_id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" Account ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.money}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("$ was successful.</p>\n");
       out.write("        ");
 
             } catch (SQLException ex) {
         
       out.write("\n");
-      out.write("        <p class=\"red\">");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(" was NOT removed.</p>\n");
+      out.write("        <p class=\"red\">Transfer from ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.sender_id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" to ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.receiver_id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" Account ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.money}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("$ was FAILED.</p>\n");
       out.write("        ");
 
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
             } catch (NumberFormatException ex) {
         
       out.write("\n");
-      out.write("        <p class=\"red\">");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(" was NOT removed.</p>\n");
+      out.write("        <p class=\"red\">Transfer from ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.sender_id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" to ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.receiver_id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" Account ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.money}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("$ was FAILED.</p>\n");
       out.write("        ");
 
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);

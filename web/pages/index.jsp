@@ -7,21 +7,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Banking</title>
         <link href="../css/main.css" rel="stylesheet" type="text/css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type='text/javascript'>
-            function GetBalance(id) {
-//                $.post()
-//$.ajax({
-//    type: "POST"
-//    url: url,
-//    data: data,
-//    dataType: "json",
-//    success: function(data) {
-//        //
-//    },
-//    error: function() {
-//        //
-//    }
-//});
+            function getBalance(nId) {
+                $.post('pages/get_balance.jsp?id=' + nId, function(data) {
+                    $('#acc_id_' + nId).html(data);
+                });
+                return false;
             }
         </script>
     </head>
@@ -39,18 +31,17 @@
         <form method="POST" action="pages/remove_account.jsp"
               class="box horizontal" style="margin-left: 15px;">
             <div class="label centered">Remove Account</div>
-            <p>Account ID: <input type="text" name="id" value="Input ID" size="6" /></p>
-            <!--<p><input type="button" value="Check Balance" onclick="GetBalance()"/></p>-->
+            <p><input type="button" value="Get Balance" onclick="GetBalance()"/></p>
             <p><input type="submit" value="Remove Account" /></p>
         </form>
 
         <form method="POST" action="pages/add_money.jsp"
               class="box horizontal" style="margin-left: 15px;">
             <div class="label centered">Adding|Subtracting Money</div>
-            <p>$: <input type="text" name="money" size="10" /></p>
             <p>Account ID: <input type="text" name="id" value="Input ID" size="6" /></p>
-            <p><input type="submit" name="add_balance" value="+" title="Add to Balance" class="centered" />
-                <input type="submit" name="sub_balance" value="-" title="Subtract from Balance" class="centered"/></p>
+            <p>$: <input type="text" name="money" size="10" /></p>
+            <p><input type="submit" name="add_balance" value="+" title="Add to Balance" />
+                <input type="submit" name="sub_balance" value="-" title="Subtract from Balance" /></p>
         </form>
 
         <form method="POST" action="pages/transfer_money.jsp"
@@ -88,7 +79,7 @@
                         <td>
                             <div id="acc_id_<%=account.getID()%>"><%=account.getBalance()%></div>
                             <input type="button" value="$" title="Get Balance"
-                                   onclick="GetBalance(<%=account.getID()%>)" />
+                                   onclick="getBalance(<%=account.getID()%>)" />
                         </td>
                         <td>
                             <form method="POST" action="pages/remove_account.jsp">
@@ -97,8 +88,7 @@
                             </form>
 
                             <form method="POST" action="pages/add_money.jsp">
-                                $:
-                                <input type="text" name="money" value="" size="10" />
+                                $: <input type="text" name="money" value="" size="10" />
                                 <input type="hidden" name="id" value="<%=account.getID()%>" />
                                 <input type="submit" name="add_balance" value="+" title="Add to Balance" />
                                 <input type="submit" name="sub_balance" value="-" title="Subtract from Balance" />
@@ -107,7 +97,7 @@
                             <form method="POST" action="pages/transfer_money.jsp">
                                 <input type="hidden" name="sender_id" value="<%=account.getID()%>" />
                                 Sending to: <input type="text" name="receiver_id" size="6" /> 
-                                $: <input type="text" name="money" value="400" size="10" />
+                                $: <input type="text" name="money" value="" size="10" />
                                 <input type="submit" name="transfer_money" value="Send" title="Send Money" />
                             </form>
                         </td>

@@ -1,36 +1,40 @@
+<%@page import="java.sql.SQLException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Account Removing</title>
+        <title>Add Money</title>
         <link href="../css/main.css" rel="stylesheet" type="text/css">
     </head>
 
     <body>
         <%@include file="../WEB-INF/jspf/nav.jspf" %>
 
+        <%!private String operation;%>
         <%
-            boolean success = false;
-            if (request.getParameter("add_balance") != null) {
-                success = accountManager.AddMoney(request.getParameter("id"),request.getParameter("money"));
-            } else if (request.getParameter("sub_balance") != null) {
-                success = accountManager.SubMoney(request.getParameter("id"),request.getParameter("money"));
-            }
-            
-            String strStatus;
-            String strClass;
-            if (success) {
-                strStatus = " was removed success.";
-                strClass = "green";
-            } else {
-                strStatus = " was not removed.";
-                strClass = "red";
-                response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+            try {
+                if (request.getParameter("add_balance") != null) {
+                    accountManager.addMoney(request.getParameter("id"),request.getParameter("money"));
+                    operation = "Adding to";
+                } else if (request.getParameter("sub_balance") != null) {
+                    accountManager.subMoney(request.getParameter("id"),request.getParameter("money"));
+                    operation = "Subtracting from";
+                }        
+        %>
+        <p class="green"><%=operation%> ${param.id} Account on ${param.money}$ was successful.</p>
+        <%
+            } catch (SQLException ex) {
+        %>
+        <p class="red"><%=operation%> ${param.id} Account on ${param.money}$ was FAILED.</p>
+        <%
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+            } catch (NumberFormatException ex) {
+        %>
+        <p class="red"><%=operation%> ${param.id} Account on ${param.money}$ was FAILED.</p>
+        <%
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
             }
         %>
-        <p class="<%=strClass%>">${param.id}
-            <%=strStatus%>
-        </p>
     </body>
 </html>

@@ -5,17 +5,12 @@ import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import java.sql.SQLException;
 
-public final class remove_005faccount_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class get_005fbalance_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
   private static java.util.List<String> _jspx_dependants;
-
-  static {
-    _jspx_dependants = new java.util.ArrayList<String>(1);
-    _jspx_dependants.add("/pages/../WEB-INF/jspf/nav.jspf");
-  }
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
@@ -49,17 +44,7 @@ public final class remove_005faccount_jsp extends org.apache.jasper.runtime.Http
 
       out.write("\n");
       out.write("\n");
-      out.write("<!DOCTYPE html>\n");
-      out.write("<html>\n");
-      out.write("    <head>\n");
-      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>Account Removing</title>\n");
-      out.write("        <link href=\"../css/main.css\" rel=\"stylesheet\" type=\"text/css\">\n");
-      out.write("    </head>\n");
       out.write("\n");
-      out.write("    <body>\n");
-      out.write("        ");
-      out.write('\n');
       beans.AccountManager accountManager = null;
       synchronized (_jspx_page_context) {
         accountManager = (beans.AccountManager) _jspx_page_context.getAttribute("accountManager", PageContext.PAGE_SCOPE);
@@ -68,46 +53,23 @@ public final class remove_005faccount_jsp extends org.apache.jasper.runtime.Http
           _jspx_page_context.setAttribute("accountManager", accountManager, PageContext.PAGE_SCOPE);
         }
       }
-      out.write("\n");
-      out.write("<!--scope=\"page|application\"-->\n");
-      out.write("<a href=\"/\">Home</a>\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("        ");
+      out.write('\n');
+      out.write('\n');
 
-            try {
-                accountManager.removeAccountById(request.getParameter("id"));
-        
-      out.write("\n");
-      out.write("        <p class=\"green\">");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(" was removed success.</p>\n");
-      out.write("        ");
+    try {
+        int balance = accountManager.getBalance(request.getParameter("id"));
 
-            } catch (SQLException ex) {
-        
       out.write("\n");
-      out.write("        <p class=\"red\">");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(" was NOT removed.</p>\n");
-      out.write("        ");
+      out.write("<div class=\"green\">");
+      out.print(balance);
+      out.write("</div>\n");
 
-            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
-            } catch (NumberFormatException ex) {
-        
-      out.write("\n");
-      out.write("        <p class=\"red\">");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(" was NOT removed.</p>\n");
-      out.write("        ");
+    } catch (SQLException ex) {
+        response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+    } catch (NumberFormatException ex) {
+        response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+    }
 
-            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
-            }
-        
-      out.write("\n");
-      out.write("    </body>\n");
-      out.write("</html>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

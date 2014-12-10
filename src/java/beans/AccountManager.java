@@ -12,9 +12,8 @@ import utils.Database;
 
 public class AccountManager {
 
-    private List<Account> accountList = new ArrayList<Account>();
-
     public List<Account> getAllAccountList() {
+        List<Account> accountList = new ArrayList<Account>();
         Statement stmt = null;
         ResultSet rs = null;
         Connection conn = null;
@@ -62,10 +61,6 @@ public class AccountManager {
             if (res == 0) {
                 throw new SQLException("Execute Query was not executed.");
             }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(AccountManager.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (NumberFormatException ex) {
-//            Logger.getLogger(AccountManager.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (stmt != null) {
@@ -92,15 +87,7 @@ public class AccountManager {
         updateTable(sql);
     }
 
-    public void AddMoney(String strId, String strMoney) throws SQLException, NumberFormatException {
-        AddOrSubMoney(strId, strMoney, "+");
-    }
-
-    public void SubMoney(String strId, String strMoney) throws SQLException, NumberFormatException {
-        AddOrSubMoney(strId, strMoney, "-");
-    }
-
-    private void AddOrSubMoney(String strId, String strMoney, String sign) throws SQLException, NumberFormatException {
+    private void addOrSubMoney(String strId, String strMoney, String sign) throws SQLException, NumberFormatException {
         Integer.parseInt(strId);
         Integer.parseInt(strMoney);
         String sql = "UPDATE `Banking`.`ACCOUNT` SET `BALANCE` = `BALANCE` "
@@ -108,11 +95,47 @@ public class AccountManager {
         updateTable(sql);
     }
 
-//    private boolean getBalance(String strId) {
-//
-//    }
-//
-//    private boolean checkBalance(String strId, ) {
-//
-//    }
+    public void addMoney(String strId, String strMoney) throws SQLException, NumberFormatException {
+        addOrSubMoney(strId, strMoney, "+");
+    }
+
+    public void subMoney(String strId, String strMoney) throws SQLException, NumberFormatException {
+        addOrSubMoney(strId, strMoney, "-");
+    }
+
+    public void transferMoney(String strSenderId, String strReceiverId, String strMoney) throws SQLException, NumberFormatException {
+        subMoney(strSenderId, strMoney);
+        addMoney(strReceiverId, strMoney);
+    }
+
+    public int getBalance(String strId) throws SQLException, NumberFormatException {
+        Integer.parseInt(strId);
+        Statement stmt = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        int balance;
+        
+        try {
+            conn = Database.getConnection();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery("SELECT `BALANCE` FROM `ACCOUNT` WHERE `ID` = " + strId + ";");
+            rs.next();
+            balance = rs.getInt("BALANCE");
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return balance;
+    }
 }

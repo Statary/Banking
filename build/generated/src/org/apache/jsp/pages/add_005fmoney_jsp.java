@@ -5,9 +5,10 @@ import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import java.sql.SQLException;
 
-public final class remove_005faccount_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class add_005fmoney_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
+private String operation;
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
   private static java.util.List<String> _jspx_dependants;
@@ -53,7 +54,7 @@ public final class remove_005faccount_jsp extends org.apache.jasper.runtime.Http
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>Account Removing</title>\n");
+      out.write("        <title>Add Money</title>\n");
       out.write("        <link href=\"../css/main.css\" rel=\"stylesheet\" type=\"text/css\">\n");
       out.write("    </head>\n");
       out.write("\n");
@@ -75,22 +76,38 @@ public final class remove_005faccount_jsp extends org.apache.jasper.runtime.Http
       out.write("\n");
       out.write("\n");
       out.write("        ");
+      out.write("\n");
+      out.write("        ");
 
             try {
-                accountManager.removeAccountById(request.getParameter("id"));
+                if (request.getParameter("add_balance") != null) {
+                    accountManager.addMoney(request.getParameter("id"),request.getParameter("money"));
+                    operation = "Adding to";
+                } else if (request.getParameter("sub_balance") != null) {
+                    accountManager.subMoney(request.getParameter("id"),request.getParameter("money"));
+                    operation = "Subtracting from";
+                }        
         
       out.write("\n");
       out.write("        <p class=\"green\">");
+      out.print(operation);
+      out.write(' ');
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(" was removed success.</p>\n");
+      out.write(" Account on ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.money}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("$ was successful.</p>\n");
       out.write("        ");
 
             } catch (SQLException ex) {
         
       out.write("\n");
       out.write("        <p class=\"red\">");
+      out.print(operation);
+      out.write(' ');
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(" was NOT removed.</p>\n");
+      out.write(" Account on ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.money}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("$ was FAILED.</p>\n");
       out.write("        ");
 
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
@@ -98,8 +115,12 @@ public final class remove_005faccount_jsp extends org.apache.jasper.runtime.Http
         
       out.write("\n");
       out.write("        <p class=\"red\">");
+      out.print(operation);
+      out.write(' ');
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(" was NOT removed.</p>\n");
+      out.write(" Account on ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${param.money}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("$ was FAILED.</p>\n");
       out.write("        ");
 
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
