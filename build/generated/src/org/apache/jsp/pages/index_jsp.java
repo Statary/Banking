@@ -63,18 +63,6 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                $.post('pages/get_balance.jsp?id=' + nId, function(data) {\r\n");
       out.write("                    $('#acc_id_' + nId).html(data);\r\n");
       out.write("                });\r\n");
-      out.write("//                $.ajax({\r\n");
-      out.write("//        type:       \"post\",\r\n");
-      out.write("//        url:        \"dimensionList.jsp\",\r\n");
-      out.write("//        data:       {\"dimensionName\":\"Slappy\"},\r\n");
-      out.write("//        success:    function(msg) {\r\n");
-      out.write("//                            alert(msg.data);\r\n");
-      out.write("//            },\r\n");
-      out.write("//            error:function (xhr, ajaxOptions, thrownError){\r\n");
-      out.write("//                alert(xhr.status);\r\n");
-      out.write("//                alert(thrownError);\r\n");
-      out.write("//            }  \r\n");
-      out.write("//    });\r\n");
       out.write("                return false;\r\n");
       out.write("            }\r\n");
       out.write("        </script>\r\n");
@@ -107,8 +95,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <form method=\"POST\" action=\"pages/remove_account.jsp\"\r\n");
       out.write("              class=\"box horizontal\" style=\"margin-left: 15px;\">\r\n");
       out.write("            <div class=\"label centered\">Remove Account</div>\r\n");
-      out.write("            <p>Account ID: <input type=\"text\" name=\"id\" value=\"Input ID\" size=\"6\" /></p>\r\n");
-      out.write("            <!--<p><input type=\"button\" value=\"Check Balance\" onclick=\"GetBalance()\"/></p>-->\r\n");
+      out.write("            <p><input type=\"button\" value=\"Get Balance\" onclick=\"GetBalance()\"/></p>\r\n");
       out.write("            <p><input type=\"submit\" value=\"Remove Account\" /></p>\r\n");
       out.write("        </form>\r\n");
       out.write("\r\n");
