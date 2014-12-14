@@ -61,11 +61,11 @@ public final class remove_005faccount_jsp extends org.apache.jasper.runtime.Http
       out.write("        ");
       out.write('\n');
       beans.AccountManager accountManager = null;
-      synchronized (_jspx_page_context) {
-        accountManager = (beans.AccountManager) _jspx_page_context.getAttribute("accountManager", PageContext.PAGE_SCOPE);
+      synchronized (application) {
+        accountManager = (beans.AccountManager) _jspx_page_context.getAttribute("accountManager", PageContext.APPLICATION_SCOPE);
         if (accountManager == null){
           accountManager = new beans.AccountManager();
-          _jspx_page_context.setAttribute("accountManager", accountManager, PageContext.PAGE_SCOPE);
+          _jspx_page_context.setAttribute("accountManager", accountManager, PageContext.APPLICATION_SCOPE);
         }
       }
       out.write("\n");

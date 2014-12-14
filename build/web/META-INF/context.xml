@@ -2,8 +2,8 @@
 <Context antiJARLocking="true" path="/Banking">
   <Resource name="jdbc/banking" auth="Container" type="javax.sql.DataSource"
                maxActive="110" maxIdle="30" maxWait="10000"
-               username="root" password="1sRg3pssLC" 
+               username="root" password="HDtloBTPFa" 
                driverClassName="com.mysql.jdbc.Driver"
-               url="jdbc:mysql://mysql66106-env-7803014.jelastic.regruhosting.ru/Banking"/>
+               url="jdbc:mysql://mysql66988-banking.jelastic.regruhosting.ru/Banking"/>
  
 </Context>

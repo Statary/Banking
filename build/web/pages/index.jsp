@@ -31,7 +31,8 @@
         <form method="POST" action="pages/remove_account.jsp"
               class="box horizontal" style="margin-left: 15px;">
             <div class="label centered">Remove Account</div>
-            <p><input type="button" value="Get Balance" onclick="GetBalance()"/></p>
+            <p>Account ID: <input type="text" name="id" value="Input ID" size="6" /></p>
+            <!--<p><input type="button" value="Check Balance" onclick="GetBalance()"/></p>-->
             <p><input type="submit" value="Remove Account" /></p>
         </form>
 

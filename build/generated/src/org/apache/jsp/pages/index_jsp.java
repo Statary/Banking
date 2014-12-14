@@ -71,11 +71,11 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        ");
       out.write('\n');
       beans.AccountManager accountManager = null;
-      synchronized (_jspx_page_context) {
-        accountManager = (beans.AccountManager) _jspx_page_context.getAttribute("accountManager", PageContext.PAGE_SCOPE);
+      synchronized (application) {
+        accountManager = (beans.AccountManager) _jspx_page_context.getAttribute("accountManager", PageContext.APPLICATION_SCOPE);
         if (accountManager == null){
           accountManager = new beans.AccountManager();
-          _jspx_page_context.setAttribute("accountManager", accountManager, PageContext.PAGE_SCOPE);
+          _jspx_page_context.setAttribute("accountManager", accountManager, PageContext.APPLICATION_SCOPE);
         }
       }
       out.write("\n");
@@ -95,7 +95,8 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <form method=\"POST\" action=\"pages/remove_account.jsp\"\r\n");
       out.write("              class=\"box horizontal\" style=\"margin-left: 15px;\">\r\n");
       out.write("            <div class=\"label centered\">Remove Account</div>\r\n");
-      out.write("            <p><input type=\"button\" value=\"Get Balance\" onclick=\"GetBalance()\"/></p>\r\n");
+      out.write("            <p>Account ID: <input type=\"text\" name=\"id\" value=\"Input ID\" size=\"6\" /></p>\r\n");
+      out.write("            <!--<p><input type=\"button\" value=\"Check Balance\" onclick=\"GetBalance()\"/></p>-->\r\n");
       out.write("            <p><input type=\"submit\" value=\"Remove Account\" /></p>\r\n");
       out.write("        </form>\r\n");
       out.write("\r\n");

@@ -1,7 +1,7 @@
 <%@page import="java.sql.SQLException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<jsp:useBean id="accountManager" class="beans.AccountManager" scope="page"/>
+<jsp:useBean id="accountManager" class="beans.AccountManager" scope="application"/>
 
 <%
     try {

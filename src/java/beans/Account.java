@@ -6,13 +6,6 @@ public class Account {
     private String doc;
     private Integer balance;
 
-//    public Account(Integer ID, String fio, String doc, Integer balance) {
-//        this.ID = ID;
-//        this.fio = fio;
-//        this.doc = doc;
-//        this.balance = balance;
-//    }
-
     public Integer getID() {
         return ID;
     }
